@@ -2,7 +2,7 @@ const fs = require("fs/promises");
 const path = require("path");
 const contactsPath = path.join(__dirname, "./db/contacts.json");
 const crypto = require("crypto");
-const id = crypto.randomBytes(7).toString("hex");
+
 
 async function updateContacts(arr) {
   await fs.writeFile(contactsPath, JSON.stringify(arr, null, 2));
@@ -50,7 +50,7 @@ async function addContact(name, email, phone) {
     const newContact = [
       ...allContacts,
       {
-        id: id,
+        id: crypto.randomUUID()
         name,
         email,
         phone,
